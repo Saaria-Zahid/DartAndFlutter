@@ -75,9 +75,9 @@ void main() {
     print("Positive & Negative Number");
     double pNum = -2;
     if(pNum >= 0){
-      print("Possitive");
+      print("The Number ${pNum} is Possitive");
     }else {
-      print("Negative");
+      print("The Number ${pNum} is Negative");
     }
     
     
