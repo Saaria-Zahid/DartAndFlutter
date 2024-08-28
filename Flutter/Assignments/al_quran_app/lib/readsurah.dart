@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 class ReadSurah extends StatefulWidget {
-  var index;
+  final int index;
  ReadSurah(this.index ,{super.key});
 
   @override
@@ -16,25 +16,37 @@ class _ReadSurahState extends State<ReadSurah> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(quran.getSurahName(18)),
+          title: Text(quran.getSurahName(widget.index)),
         ),
-        body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.all(15.0),
-            child: ListView.builder(
-              itemCount: quran.getVerseCount(18),
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(
-                    quran.getVerse(18, index + 1, verseEndSymbol: true),
-                    textAlign: TextAlign.right,
-                    style: GoogleFonts.amiri(),
+        
+        body: 
+        ListView.separated(itemBuilder: (context , index){
+          return ListTile(
+                  title: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(child: (
+                         quran.isSajdahVerse(widget.index, index+1) 
+                         ? Text(quran.getVerse(widget.index, index + 1, verseEndSymbol: true),textAlign: TextAlign.right, style: GoogleFonts.amiri(fontSize: 25, color: Colors.amber ))
+                         : Text(quran.getVerse(widget.index, index + 1, verseEndSymbol: true),textAlign: TextAlign.right, style: GoogleFonts.amiri(fontSize: 25 ))
+                         
+                    ),)
+                  ),
+                  subtitle: Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        quran.getVerseTranslation(widget.index, index + 1, verseEndSymbol: true,  translation: quran.Translation.enSaheeh)
+                      ),
+                    ),
                   ),
                 );
-              },
-            ),
-          ),
-        ),
+        }, separatorBuilder: (context, index){
+          return Divider(
+          height: 20,
+          thickness: 2,
+        );
+        }, itemCount: quran.getVerseCount(widget.index)),
+
       );
   }
 }
