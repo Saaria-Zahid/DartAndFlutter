@@ -24,6 +24,7 @@ class _HomeState extends State<Home> {
         
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => ReadSurah(index+1),));
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => Recitation(index+1),));
           },
           leading: 
           CircleAvatar(
