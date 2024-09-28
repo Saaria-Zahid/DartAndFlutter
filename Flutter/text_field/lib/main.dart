@@ -26,6 +26,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController phone = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -48,21 +49,41 @@ class _HomeState extends State<Home> {
                       controller: username,
                       decoration: InputDecoration(
                           prefixIcon: Icon(Icons.account_circle),
-                          suffix: IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.remove_red_eye)),
+                          // suffix: IconButton(
+                          //     onPressed: () {},
+                          //     icon: Icon(Icons.remove_red_eye)),
                           enabledBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.green.shade400),
                               borderRadius: BorderRadius.circular(10)),
                           focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.blue.shade200),
+                            borderSide: BorderSide(color: Colors.blue.shade200),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           label: Text('Name'),
                           hintFadeDuration: Duration(seconds: 1),
                           hintText: "Saaria")),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextField(
+                      keyboardType: TextInputType.number,
+                      controller: phone,
+                      decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.phone),
+                          // suffix: IconButton(
+                          //     onPressed: () {}, icon: Icon(Icons.remove_red_eye)),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.green.shade400),
+                              borderRadius: BorderRadius.circular(10)),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blue.shade200),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          label: Text('Phone Number'),
+                          hintFadeDuration: Duration(seconds: 1),
+                          hintText: "03...")),
                   SizedBox(
                     height: 10,
                   ),
@@ -76,7 +97,8 @@ class _HomeState extends State<Home> {
                         suffix: IconButton(
                             onPressed: () {}, icon: Icon(Icons.remove_red_eye)),
                         enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green.shade400),
+                            borderSide:
+                                BorderSide(color: Colors.green.shade400),
                             borderRadius: BorderRadius.circular(10)),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue.shade200),
@@ -84,27 +106,34 @@ class _HomeState extends State<Home> {
                         ),
                         label: Text('Password'),
                       )),
-SizedBox(
+                  SizedBox(
                     height: 10,
                   ),
-
-                 SizedBox(
-                  width: double.infinity,
-                   child: ElevatedButton(onPressed: (){
-                    String name = username.text.toString();
-                    String pass = password.text;
-                    print('My Name is ${name}');
-                    print('My Password is ${pass}');
-                   
-                   },
-                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green.shade400,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                    padding: EdgeInsets.only(top: 20, bottom: 20),
-                    
-                   ),
-                    child: Text('Submit', style: TextStyle(color: Colors.white),)),
-                 )
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          String name = username.text.toString();
+                          String pass = password.text;
+                          String pnum = phone.text;
+                          print('My Name is ${name}');
+                          print('My Password is ${pass}');
+                          print('My Phone Number is ${pnum}');
+                          username.text = "";
+                          password.text = "";
+                          phone.text = "";
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green.shade400,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          padding: EdgeInsets.only(top: 20, bottom: 20),
+                        ),
+                        child: Text(
+                          'Submit',
+                          style: TextStyle(color: Colors.white),
+                        )),
+                  )
                 ],
               ),
             ),
