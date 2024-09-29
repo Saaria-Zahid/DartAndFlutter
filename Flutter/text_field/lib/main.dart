@@ -11,19 +11,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home: login(),
     );
   }
 }
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class login extends StatefulWidget {
+  const login({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<login> createState() => _loginState();
 }
 
-class _HomeState extends State<Home> {
+class _loginState extends State<login> {
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController phone = TextEditingController();
@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
             child: Container(
               width: double.infinity,
               height: double.infinity,
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
                       // obscuringCharacter: "*",
                       controller: username,
                       decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.account_circle),
+                          prefixIcon: const Icon(Icons.account_circle),
                           // suffix: IconButton(
                           //     onPressed: () {},
                           //     icon: Icon(Icons.remove_red_eye)),
@@ -60,17 +60,17 @@ class _HomeState extends State<Home> {
                             borderSide: BorderSide(color: Colors.blue.shade200),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          label: Text('Name'),
-                          hintFadeDuration: Duration(seconds: 1),
+                          label: const Text('Name'),
+                          hintFadeDuration: const Duration(seconds: 1),
                           hintText: "Saaria")),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   TextField(
                       keyboardType: TextInputType.number,
                       controller: phone,
                       decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.phone),
+                          prefixIcon: const Icon(Icons.phone),
                           // suffix: IconButton(
                           //     onPressed: () {}, icon: Icon(Icons.remove_red_eye)),
                           enabledBorder: OutlineInputBorder(
@@ -81,10 +81,10 @@ class _HomeState extends State<Home> {
                             borderSide: BorderSide(color: Colors.blue.shade200),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          label: Text('Phone Number'),
-                          hintFadeDuration: Duration(seconds: 1),
+                          label: const Text('Phone Number'),
+                          hintFadeDuration: const Duration(seconds: 1),
                           hintText: "03...")),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   TextField(
@@ -93,9 +93,10 @@ class _HomeState extends State<Home> {
                       obscuringCharacter: "*",
                       controller: password,
                       decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.lock),
+                        prefixIcon: const Icon(Icons.lock),
                         suffix: IconButton(
-                            onPressed: () {}, icon: Icon(Icons.remove_red_eye)),
+                            onPressed: () {},
+                            icon: const Icon(Icons.remove_red_eye)),
                         enabledBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.green.shade400),
@@ -104,32 +105,52 @@ class _HomeState extends State<Home> {
                           borderSide: BorderSide(color: Colors.blue.shade200),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        label: Text('Password'),
+                        label: const Text('Password'),
                       )),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                         onPressed: () {
-                          String name = username.text.toString();
-                          String pass = password.text;
-                          String pnum = phone.text;
-                          print('My Name is ${name}');
-                          print('My Password is ${pass}');
-                          print('My Phone Number is ${pnum}');
-                          username.text = "";
-                          password.text = "";
-                          phone.text = "";
+                          // String name = username.text.toString();
+                          // String pass = password.text;
+                          // String pnum = phone.text;
+                          // print('My Name is $name');
+                          // print('My Password is $pass');
+                          // print('My Phone Number is $pnum');
+                          // username.text = "";
+                          // password.text = "";
+                          // phone.text = "";
+
+                          // final List<Map<String, String>> userinfo = [
+                          //   {
+                          //     "name": '${username.text}',
+                          //     "password": '${password.text}',
+                          //     "phone": '${phone.text}',
+                          //   }
+                          // ];
+
+                          UserInfo userinfo = UserInfo(
+                            name: username.text,
+                            password: password.text,
+                            phone: phone.text,
+                          );
+
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Home(userinfo: userinfo)));
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green.shade400,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
-                          padding: EdgeInsets.only(top: 20, bottom: 20),
+                          padding: const EdgeInsets.only(top: 20, bottom: 20),
                         ),
-                        child: Text(
+                        child: const Text(
                           'Submit',
                           style: TextStyle(color: Colors.white),
                         )),
@@ -142,4 +163,35 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+}
+
+class Home extends StatefulWidget {
+  final UserInfo userinfo;
+
+  Home({Key? key, required this.userinfo}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Text('Username: ${widget.userinfo.name}'),
+    );
+  }
+}
+
+class UserInfo{
+  final String name;
+  final String password;
+  final String phone;
+
+
+UserInfo({
+  required this.name,
+  required this.password,
+  required this.phone,
+});
 }
