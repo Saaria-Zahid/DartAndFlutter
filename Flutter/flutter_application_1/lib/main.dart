@@ -16,11 +16,8 @@ class MyApp extends StatelessWidget {
         Center(
           child: Column(
             children: [
-              Text("Saaria Zahid"),
-              Text("Saaria Zahid"),
-              Text("Saaria Zahid"),
-              Text("Saaria Zahid"),
-              Text("Saaria Zahid"),
+              Text("Hello"),
+              Text("This Is My First App "),
             
             ],
           ),
