@@ -13,12 +13,20 @@ void main() async {
   runApp(const MyApp());
 }
 
+ThemeData colorTheme = ThemeData(
+  brightness: Brightness.light,
+  scaffoldBackgroundColor: Color(0xfff6f6f6),
+  primaryColor: Colors.white,
+);
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(debugShowCheckedModeBanner: false, home: SplashScr());
+    return MaterialApp(debugShowCheckedModeBanner: false,
+    theme: colorTheme,
+     home: SplashScr());
   }
 }
 
